@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+Actipro Syntax Language Definition (.langdef)
+  For use with Actipro SyntaxEditor and related products.
+  http://www.actiprosoftware.com
+
+'MySQL' language created by CMBSolutions.
+  CMBSolutions 2024
+
+-->
+<LanguageDefinition LanguageKey="MySQL" LanguageDescription="MySQL" Creator="CMBSolutions" Copyright="CMBSolutions 2024" xmlns="http://schemas.actiprosoftware.com/langdef/1.0">
+	<!-- Classification types -->
+	<LanguageDefinition.ClassificationTypes>
+		<ClassificationType Key="Comment" DefaultStyle="#FF008000" />
+		<ClassificationType Key="Delimiter" DefaultStyle="#FF0083FF" />
+		<ClassificationType Key="Identifier" DefaultStyle="#FFFF00D2" />
+		<ClassificationType Key="Keyword" DefaultStyle="#FF0000FF" />
+		<ClassificationType Key="Number" DefaultStyle="#FFFFAA00" />
+		<ClassificationType Key="Operator" DefaultStyle="#FF4E00D0" />
+		<ClassificationType Key="String" DefaultStyle="#FF5EF900" />
+	</LanguageDefinition.ClassificationTypes>
+	<!-- Lexer -->
+	<LanguageDefinition.Lexer>
+		<DynamicLexer>
+			<!-- Default state -->
+			<State Id="1" Key="Default" DefaultTokenId="0" DefaultClassificationTypeKey="Keyword">
+				<State.ChildStates>
+					<StateRef Key="PrimaryString" />
+					<StateRef Key="AlternateString" />
+					<StateRef Key="SingleLineComment" />
+				</State.ChildStates>
+				<RegexPatternGroup TokenId="1" TokenKey="Whitespace" Pattern="{Whitespace}+" />
+				<RegexPatternGroup TokenId="2" TokenKey="LineTerminator" Pattern="{LineTerminator}" />
+				<ExplicitPatternGroup TokenId="3" TokenKey="OpenParenthesis" ClassificationTypeKey="Delimiter" Pattern="(" />
+				<ExplicitPatternGroup TokenId="4" TokenKey="CloseParenthesis" ClassificationTypeKey="Delimiter" Pattern=")" />
+				<ExplicitPatternGroup TokenId="5" TokenKey="Keyword" ClassificationTypeKey="Keyword" LookAheadPattern="{NonWord}|\z">
+					<ExplicitPatterns><![CDATA[
+						absolute abs accessible access account acos action adddate add_months add admin after against
+						aggregate algorithm allocate all alter always analyze and any app_name are array ascii asc asensitive
+						asin assertion as atan atn2 atomic at audit authid authorization authors autoextend_size autonomous_transaction
+						auto_increment auto avg_row_length avg backup before begin benchmark between bfilename bigint
+						binary_checksum binary_integer binary binlog bin bit_and bit_count bit_or bit blob block body
+						boolean bool both breadth btree bulk byte by cache call cascaded cascade case cast catalog_name
+						catalog ceiling ceil chain changed change character charindex charset chartorowid char_base
+						char checkpoint checksum_agg checksum check chr cipher class_origin class client clob close cluster
+						coalesce code collate collation collect columns column_add column_check column_create column_delete
+						column_get column_name column col_length col_name comment committed commit compact completion
+						compressed compress concat_ws concat concurrent condition connection connect consistent constant
+						constraints constraint_catalog constraint_name constraint_schema constraint constructorcreate
+						containsable contains context continue contributors convert conv corresponding corr cos cot
+						count_big count covar_pop covar_samp cpu create cross cube cume_dist current_date current_path
+						current_pos current_role current_timestamp current_time current_user current currval cursor_name
+						cursor cycle databasepropertyex databases database datafile datalength data dateadd datediff
+						datename datepart datetime date_add date_format date_sub date day_hour day_microsecond day_minute
+						day_second day db_id db_name deallocate decimal declare decode dec default deferrable deferred
+						definer degrees delayed delay_key_write delete_domain_id delete dense_rank depth deref describe
+						descriptor desc destroy destructor des_key_file deterministic diagnostics dictionary difference
+						directory disable discard disconnect disk distinctrow distinct div domain double do_domain_ids
+						do drop dual dumpfile dump duplicate dynamic each elseif else elsif empth enable enclosed encode
+						encrypt end-exec ends end engines engine enum equals errors error escaped escape events event every
+						examined exception except exchange exclude exclusive execute exec exists exit expansion expire
+						explain export_set export exp extended extends extent_size external extract false fast faults
+						fetch fields filegroupproperty filegroup_id filegroup_name fileproperty file_id file_name
+						file first_value first fixed float4 float8 float floor flush following follows forall force foreign
+						formatmessage format for found freetexttable from_days from fulltextcatalog fulltextservice
+						fulltext full function general generated geometrycollection geometry getansinull getdate getutcdate
+						get_format get_lock get global goto go grants grant greatest grouping group handler hard hash having
+						heap help hextoraw hex high_priority history hosts host_id host_name host hour_microsecond hour_minute
+						hour_second hour identified identity ident_current ident_incr ident_seed id ifnull if ignore_domain_ids
+						ignore_server_ids ignore immediate import increment indexes indexproperty index_col index
+						indicator infile initcap initialize initially initial_size initial inner inout input insensitive
+						insert_method insert install instrb instr int1 int2 int3 int4 int8 integer interface intersect
+						interval into int invisible invoker in io_thread io ipc isdate isnull isolation isopen issuer is_member
+						is_null is_numeric is_srvrolemember is iterate java join json keys key_block_size key kill lag
+						language large lastval last_day last_value last lateral lcase leading lead least leaves leave
+						left lengthb length len less level like limited limit linear linestring lines list ln load localtimestamp
+						localtime local locator locks lock log10 logfile logs log longblob longtext long loop lower low_priority
+						lpad ltrim make_ref map master_connect_retry master_delay master_gtid_pos master_heartbeat_period
+						master_host master_log_file master_log_pos master_password master_port master_server_id
+						master_ssl_capath master_ssl_ca master_ssl_cert master_ssl_cipher master_ssl_crlpath master_ssl_crl
+						master_ssl_key master_ssl_verify_server_cert master_ssl master_user master_use_gtid master
+						match maxextents maxvalue max_connections_per_hour max_queries_per_hour max_rows max_size
+						max_statement_time max_updates_per_hour max_user_connections max mediumblob mediumint mediumtext
+						medium memory merge message_text microsecond middleint mid migrate minus minute_microsecond
+						minute_second minute minvalue min_rows min mlslabel mode modifies modify module mod months_between
+						month multilinestring multipoint multipolygon mutex mysql_errno mysql names name national naturaln
+						natural nchar nclob never newid new_time new nextval next_day next noaudit nocache nocompress
+						nocopy nocycle nodegroup nomaxvalue nominvalue none notfound not nowait no_wait no_write_to_binlog
+						no nullif null number_base number numeric nvarchar nvl2 nvl object_id object_name object_property
+						object ocirowid oct offline offset off of old_password old one online only on opaque open operation
+						operator optimize optionally options option order ordinalityorganization ord or others outer
+						outfile output out over owner package pack_keys pad page_checksum page parameters parameter parser
+						parse_vcol_expr partial partitioning partitions partition password path pctfree percent_rank
+						period persistent phase pi pls_integer plugins plugin point polygon portion port positiven positive
+						postfix power pow pragma precedes preceding precision prefix preorder prepare preserve previous
+						prev primary prior private privileges procedure processlist process profiles profile proxy public
+						purge quarter query quick radians raise rand range rank ratio_to_export rawtohex raw reads read_only
+						read_write read real rebuild record recover recursive redofile redo_buffer_size redundant references
+						referencing reftohex ref_system_id ref regexp relative relaylog relay_log_file relay_log_pos
+						relay_thread relay release_lock release reload remove rename reorganize repair repeatable repeat
+						replace replication require reset resignal resource restart restore restrict result resume returned_sqlstate
+						returning returns return reuse reverse revoke right rlike role rollback rollup round routine rowcount
+						rowidtochar rowid rowlabel rownum rows rowtype row_count row_format row_number row rpad rtree
+						rtrim savepoint schedule schemas schema_name schema scope scroll search second_microsecond
+						second section security seddev_samp select sensitive separate separator sequence serializable
+						serial server session_user session sets setval set share show shutdown signal signed sign simple
+						sinh sin size slaves slave_pos slave slow smallint snapshot socket soft some soname soundex sounds
+						source space spatial specifictype specific sqlcode sqlerrm sqlexception sqlstate sqlwarning
+						sql_big_result sql_buffer_result sql_cache sql_calc_found_rows sql_no_cache sql_small_result
+						sql_thread sql_tsi_day sql_tsi_hour sql_tsi_minute sql_tsi_month sql_tsi_quarter sql_tsi_second
+						sql_tsi_week sql_tsi_year sql sqrt ssl stage starting starts start statement state static stats_auto_recalc
+						stats_persistent stats_sample_pages status stddev stdev_pop std stop storage stored straight_join
+						strcmp string structure subclass_origin subdate subject subpartitions subpartition substrb
+						substring_index substring substr subtype successful sum super suspend swaps switches synonym
+						sysdate system_time system_user system sys_context sys_guid tablespace tables table_checksum
+						table_name table tanh tan temporary temptable terminated terminate text than then ties timestampadd
+						timestampdiff timestamp timezone_abbr timezone_hour timezone_minute timezone_region time
+						tinyblob tinyint tinytext to_char to_date to_days to_number to_single_byte to trailing transactional
+						transaction translate translation treat triggers trigger trim true truncate trunc types type
+						ucase uid unbounded uncommitted undefined under undofile undo_buffer_size undo unicode uninstall
+						union unique unknown unlock unnest unsigned until update upgrade upper usage userenv user_resources
+						user use_frm use using utc_date utc_timestamp utc_time validate values value varbinary varchar2
+						varcharacter varchar variables variable variance varying var_pop var_samp versioning via view
+						virtual vsize wait warnings week weight_string whenever when where while window within without
+						with work wrapper write x509 xa xml xor year_month year zerofill zone
+					]]></ExplicitPatterns>
+				</ExplicitPatternGroup>
+				<RegexPatternGroup TokenId="6" TokenKey="Identifier" ClassificationTypeKey="Identifier" Pattern="(_ | {Alpha})({Word})*" />
+				<ExplicitPatternGroup TokenId="7" TokenKey="Operator" ClassificationTypeKey="Operator">
+					<ExplicitPatterns><![CDATA[
+						!= && << <=> <= <> >= >>
+					]]></ExplicitPatterns>
+				</ExplicitPatternGroup>
+				<RegexPatternGroup TokenId="8" TokenKey="RealNumber" ClassificationTypeKey="Number" Pattern="{Digit}* \. {Digit}+" LookAheadPattern="{NonWord}|\z" />
+				<RegexPatternGroup TokenId="9" TokenKey="IntegerNumber" ClassificationTypeKey="Number" Pattern="{Digit}+" LookAheadPattern="{NonWord}|\z" />
+				<RegexPatternGroup TokenId="10" TokenKey="HexNumber" ClassificationTypeKey="Number" Pattern="0x {HexDigit}+" LookAheadPattern="{NonWord}|\z" CaseSensitivity="Insensitive" />
+				<State.Transition>
+					<StateTransition />
+				</State.Transition>
+			</State>
+			<!-- PrimaryString state -->
+			<State Id="2" Key="PrimaryString" DefaultTokenId="11" DefaultTokenKey="PrimaryStringText" DefaultClassificationTypeKey="String">
+				<State.Scopes>
+					<Scope>
+						<Scope.StartPatternGroup>
+							<ExplicitPatternGroup TokenId="12" TokenKey="PrimaryStringStartDelimiter" Pattern="'" />
+						</Scope.StartPatternGroup>
+						<Scope.EndPatternGroup>
+							<ExplicitPatternGroup TokenId="13" TokenKey="PrimaryStringEndDelimiter" Pattern="'" />
+						</Scope.EndPatternGroup>
+					</Scope>
+				</State.Scopes>
+				<RegexPatternGroup TokenId="14" TokenKey="PrimaryStringLineTerminator" Pattern="\n" />
+				<ExplicitPatternGroup TokenId="15" TokenKey="PrimaryStringEscapedDelimiter" Pattern="\'" />
+				<RegexPatternGroup TokenId="11" TokenKey="PrimaryStringText" Pattern="[^'\\\n]+" />
+			</State>
+			<!-- AlternateString state -->
+			<State Id="3" Key="AlternateString" DefaultTokenId="16" DefaultTokenKey="AlternateStringText" DefaultClassificationTypeKey="String">
+				<State.Scopes>
+					<Scope>
+						<Scope.StartPatternGroup>
+							<ExplicitPatternGroup TokenId="17" TokenKey="AlternateStringStartDelimiter" Pattern="&quot;" />
+						</Scope.StartPatternGroup>
+						<Scope.EndPatternGroup>
+							<ExplicitPatternGroup TokenId="18" TokenKey="AlternateStringEndDelimiter" Pattern="&quot;" />
+						</Scope.EndPatternGroup>
+					</Scope>
+				</State.Scopes>
+				<RegexPatternGroup TokenId="19" TokenKey="AlternateStringLineTerminator" Pattern="\n" />
+				<ExplicitPatternGroup TokenId="20" TokenKey="AlternateStringEscapedDelimiter" Pattern="\&quot;" />
+				<RegexPatternGroup TokenId="16" TokenKey="AlternateStringText" Pattern="[^\&quot;\\\n]+" />
+			</State>
+			<!-- SingleLineComment state -->
+			<State Id="4" Key="SingleLineComment" DefaultTokenId="21" DefaultTokenKey="SingleLineCommentText" DefaultClassificationTypeKey="Comment">
+				<State.Scopes>
+					<Scope>
+						<Scope.StartPatternGroup>
+							<ExplicitPatternGroup TokenId="22" TokenKey="SingleLineCommentStartDelimiter" Pattern="#" />
+						</Scope.StartPatternGroup>
+						<Scope.EndPatternGroup>
+							<RegexPatternGroup TokenId="23" TokenKey="SingleLineCommentEndDelimiter" Pattern="\n" />
+						</Scope.EndPatternGroup>
+					</Scope>
+				</State.Scopes>
+				<RegexPatternGroup TokenId="21" TokenKey="SingleLineCommentText" Pattern="[^\n]+" />
+			</State>
+		</DynamicLexer>
+	</LanguageDefinition.Lexer>
+	<!-- Example text -->
+	<LanguageDefinition.ExampleText><![CDATA[CREATE FUNCTION `qfuncExample`(`_param1` varchar(255),`_param2` varchar(100)) RETURNS tinyint(1)
+    READS SQL DATA
+    SQL SECURITY INVOKER
+BEGIN
+	#Routine body goes here...
+	DECLARE _cnt int default 0;
+
+	SELECT count(1) INTO _cnt FROM exampleTable AS et
+	JOIN exampleTable2 AS et2 ON et.id = et2.id
+	WHERE
+		et.field1 = _param1 AND
+		et2.field1 = _param2;
+
+	IF _cnt > 0 THEN
+		RETURN 1;
+	ELSE
+		RETURN 0;
+	END IF;
+END]]></LanguageDefinition.ExampleText>
+</LanguageDefinition>
