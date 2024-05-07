@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel.DataAnnotations.Schema
-Imports System.Drawing
+﻿Imports System.Drawing
 Imports CMBSolutions.Db.InfoSchema
 Imports Mysqlx.Crud
 Imports Mysqlx.XDevAPI.Relational
@@ -166,6 +165,29 @@ Namespace Models
             End Get
         End Property
 
+        Public ReadOnly Property GetDatabaseObjectsForSync() As List(Of ComparableObject)
+            Get
+                Dim TotalList As New List(Of ComparableObject)
+
+                Dim SelectableTables = From dbf In DbFrom.Tables
+                                       Join dbt In DbTo.Tables
+                                            On dbf.Name Equals dbt.Name
+                                       Where dbf.Definition = dbt.Definition
+                                       Select dbf
+
+                TotalList.AddRange(BuildFromObjectList("selectable", SelectableTables))
+
+                Dim MisMatchedTables = From dbf In DbFrom.Tables
+                                       Join dbt In DbTo.Tables
+                                        On dbf.Name Equals dbt.Name
+                                       Where dbf.Definition <> dbt.Definition
+                                       Select dbf
+
+                TotalList.AddRange(BuildFromObjectList("mismatch", MisMatchedTables))
+
+                Return TotalList
+            End Get
+        End Property
         Private Function BuildFromObjectList(GroupKind As String, Tables As IEnumerable(Of InfoSchema.Table)) As List(Of ComparableObject)
             Dim combinedList = Tables.SelectMany(
                 Function(table)
